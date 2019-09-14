@@ -17,9 +17,9 @@ export class RegisterComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private alertService: AlertService
-    ) { 
+    ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
     }
@@ -29,7 +29,10 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            homeAddress: ['', Validators.required],
+            workAddress: ['', Validators.required],
+            hasCar: ['', Validators.required]
         });
     }
 
