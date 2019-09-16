@@ -10,6 +10,7 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+  textBoxDisabled = true;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,14 +32,18 @@ export class RegisterComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
             homeAddress: ['', Validators.required],
+            companyName: ['', Validators.required],
             workAddress: ['', Validators.required],
-            hasCar: ['', Validators.required]
+            hasCar: ['', Validators.required],
+            isEmployee: ['', Validators.required],
         });
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
-
+    toggle(){
+      this.textBoxDisabled = !this.textBoxDisabled;
+    }
     onSubmit() {
         this.submitted = true;
 
