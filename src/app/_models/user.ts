@@ -10,4 +10,6 @@
     isEmployee: boolean;
     isAdmin: boolean;
     token: string;
+    companyName: string;
+    phoneNumber: string;
 }

@@ -7,11 +7,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
-import { AppComponent }  from './app.component';
-import { routing }        from './app.routing';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 
 import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -20,6 +24,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { HomeCompanyComponent } from './home-company/home-company.component';
 import { HomeEmployeeComponent } from './home-employee/home-employee.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -31,16 +36,24 @@ import { HomeEmployeeComponent } from './home-employee/home-employee.component';
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatListModule,
+
 
 
 
 
     ],
-    exports:[
+    exports: [
       BrowserAnimationsModule,
         MatExpansionModule,
         MatCardModule,
         MatFormFieldModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatListModule,
+
 
     ],
 
