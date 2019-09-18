@@ -1,68 +1,78 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import {FormControl, Validators, FormGroup} from '@angular/forms';
+import { UserService} from '@app/_services';
+import { User } from '@app/_models';
 
-import { AlertService, UserService, AuthenticationService } from '@app/_services';
 
 @Component({templateUrl: 'employee-register.component.html'})
-export class EmployeeRegisterComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
-  textBoxDisabled = true;
+export class EmployeeRegisterComponent implements OnInit{
+  public userForm: FormGroup;
+  public newUser: User;
+  constructor(
+    private router: Router,
+    private userService: UserService,
+) {}
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private userService: UserService,
-        private alertService: AlertService
-    ) {
-        // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
-    }
-
-    ngOnInit() {
-        this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            homeAddress: ['', Validators.required],
-            companyName: ['', Validators.required],
-            workAddress: ['', Validators.required],
-            hasCar: ['', Validators.required],
-            isEmployee: ['', Validators.required],
-        });
-    }
-
-    // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
-    toggle() {
-      this.textBoxDisabled = !this.textBoxDisabled;
-    }
-    onSubmit() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-
-        this.loading = true;
-        this.userService.register(this.registerForm.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
-    }
+ngOnInit() {
+  this.userForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    hasCar: new FormControl('', [Validators.required]),
+  });
 }
+
+  public createUser = (userForm) => {
+      this.newUser = {
+      id: 1,
+      firstName: this.userForm.value.firstName,
+      lastName: this.userForm.value.lastName,
+      userName: this.userForm.value.userName,
+      phoneNumber: this.userForm.value.phoneNumber,
+      password: this.userForm.value.password,
+      hasCar: this.userForm.value.hasCar,
+    };
+
+
+  }
+
+  onSubmit() {
+    this.userService.register(this.newUser);
+  }
+/*
+  firstNameError() {
+    return this.firstName.hasError('required') ? 'You must enter a value' :
+        this.firstName.hasError('firstName') ? 'Not a valid first Name' :
+            '';
+
+  }
+  lastNameError() {
+    return this.lastName.hasError('required') ? 'You must enter a value' :
+        this.lastName.hasError('lastName') ? 'Not a valid last Name' :
+            '';
+
+  }
+  userNameError() {
+    return this.userName.hasError('required') ? 'You must enter a value' :
+        this.userName.hasError('userName') ? 'Not a valid user Name' :
+            '';
+
+  }
+
+  passwordError() {
+    return this.password.hasError('required') ? 'You must enter a value' :
+        this.password.hasError('password') ? 'Not a valid password' :
+            '';
+
+  }
+
+  phoneNumberError() {
+    return this.phoneNumber.hasError('required') ? 'You must enter a value' :
+        this.phoneNumber.hasError('phoneNumber') ? 'Not a valid phone number' :
+            '';
+
+  }
+*/}

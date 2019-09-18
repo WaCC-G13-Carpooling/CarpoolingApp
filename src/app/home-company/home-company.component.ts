@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@app/_models';
-import { UserService, AuthenticationService } from '@app/_services';
+import { UserService } from '@app/_services';
 import { first } from 'rxjs/operators';
 import { Company } from '@app/_models/company';
 import {MatTableDataSource} from '@angular/material/table';
