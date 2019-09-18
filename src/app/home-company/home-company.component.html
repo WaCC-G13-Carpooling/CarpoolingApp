@@ -1,23 +1,35 @@
-
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Company Data
+        lalal
       </mat-panel-title>
       <mat-panel-description>
-        Name and base location
+lala
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <div class="example-container">
-    <mat-form-field floatPlaceholder="never">
+    <mat-form-field>
       <input matInput placeholder="Name">
     </mat-form-field>
 
-    <mat-form-field floatPlaceholder="never">
+    <mat-form-field>
       <input matInput placeholder="Base location">
     </mat-form-field>
   </div>
   </mat-expansion-panel>
+
+
+  <mat-list role="list">
+      <ul>
+          <li *ngFor="let user of users">
+              Name:{{user.firstName}} {{user.lastName}}
+              Work Place: {{user.workAddress}}
+              - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+          </li>
+      </ul>
+  </mat-list>
+
+
 </mat-accordion>
