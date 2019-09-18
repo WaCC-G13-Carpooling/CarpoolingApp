@@ -22,7 +22,6 @@ import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
 import { HomeCompanyComponent } from './home-company/home-company.component';
 import { HomeEmployeeComponent } from './home-employee/home-employee.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
@@ -59,7 +58,6 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent,
         HomeCompanyComponent,
         HomeEmployeeComponent,
         EmployeeRegisterComponent,

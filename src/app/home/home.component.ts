@@ -24,4 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/company-register');
 }
 
+login() {
+  this.router.navigateByUrl('/login');
+}
+
 }
