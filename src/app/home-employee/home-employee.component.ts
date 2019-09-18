@@ -14,6 +14,7 @@ export class HomeEmployeeComponent implements OnInit, OnDestroy {
   currentUser: User;
   currentUserSubscription: Subscription;
   users: User[] = [];
+  panelOpenState = false;
   constructor(private authenticationService: AuthenticationService,
     private userService: UserService) { this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -40,3 +41,4 @@ private loadAllUsers() {
 }
 
 }
+

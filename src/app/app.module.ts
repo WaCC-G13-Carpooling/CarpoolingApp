@@ -2,7 +2,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
@@ -21,8 +25,25 @@ import { HomeEmployeeComponent } from './home-employee/home-employee.component';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing
+        routing,
+        BrowserAnimationsModule,
+        MatExpansionModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+
+
+
+
     ],
+    exports:[
+      BrowserAnimationsModule,
+        MatExpansionModule,
+        MatCardModule,
+        MatFormFieldModule,
+
+    ],
+
     declarations: [
         AppComponent,
         AlertComponent,
@@ -30,7 +51,8 @@ import { HomeEmployeeComponent } from './home-employee/home-employee.component';
         LoginComponent,
         RegisterComponent,
         HomeCompanyComponent,
-        HomeEmployeeComponent   ],
+        HomeEmployeeComponent,
+         ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
