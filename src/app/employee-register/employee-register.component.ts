@@ -36,11 +36,19 @@ ngOnInit() {
       hasCar: this.userForm.value.hasCar,
     };
 
+    console.log(this.newUser.firstName);
+
 
   }
 
   onSubmit() {
-    this.userService.register(this.newUser);
+    this.userService.register(this.newUser)
+      .subscribe(
+        data => {
+          this.router.navigateByUrl('/employee-home');
+        }
+    );
+
   }
 /*
   firstNameError() {

@@ -14,7 +14,7 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
-    <table mat-table dataSource="users" class="mat-elevation-z8">
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
 
       <!-- Position Column -->
       <ng-container matColumnDef="First Name">
@@ -55,7 +55,7 @@
           <li *ngFor="let user of users">
               Name:{{user.firstName}} {{user.lastName}}
               Work Place: {{user.workAddress}}
-              - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+              <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
           </li>
       </ul>
   </mat-list>

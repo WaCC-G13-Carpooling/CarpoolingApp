@@ -12,15 +12,18 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./home-company.component.css']
 })
 export class HomeCompanyComponent implements OnInit {
+  loading = false;
   displayedColumns: string[] = ['First Name', 'Last Name', 'Phone Number', 'Work Address', 'Delete'];
   currentCompany: Company;
   currentUser: User;
-  users: User[] = [];
-  dataSource = new MatTableDataSource(this.users);
+  users: User[];
+  dataSource = new MatTableDataSource<User>(this.users);
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.loadAllUsers();
+    this.loading = true;
+    // tslint:disable-next-line: no-unused-expression
+    this.loadAllUsers;
   }
 
   applyFilter(filterValue: string) {
@@ -36,6 +39,7 @@ export class HomeCompanyComponent implements OnInit {
 
 private loadAllUsers() {
   this.userService.getAll().pipe(first()).subscribe(users => {
+      this.loading = false;
       this.users = users;
   });
 }
