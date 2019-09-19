@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
 import { UserService, AlertService} from '@app/_services';
 import { User } from '@app/_models';
+import { first } from 'rxjs/operators';
 
 
 @Component({templateUrl: 'employee-register.component.html'})
@@ -16,6 +17,7 @@ export class EmployeeRegisterComponent implements OnInit{
 ) {}
 
 ngOnInit() {
+
   this.userForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -26,28 +28,19 @@ ngOnInit() {
   });
 }
 
-  public createUser = (userForm) => {
-      this.newUser = {
-      id: 1,
-      firstName: this.userForm.value.firstName,
-      lastName: this.userForm.value.lastName,
-      userName: this.userForm.value.userName,
-      phoneNumber: this.userForm.value.phoneNumber,
-      password: this.userForm.value.password,
-      hasCar: this.userForm.value.hasCar,
-    };
+  onSubmit() {
+    this.userService.register(this.userForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                });
   }
 
-  onSubmit() {
-    this.userService.register(this.newUser)
-      .subscribe(
-        data => {
-          this.router.navigateByUrl('/employee-home');
-        },
-        error => {
-            this.alertService.error(error);
-        });
-  }
 /*
   firstNameError() {
     return this.firstName.hasError('required') ? 'You must enter a value' :
