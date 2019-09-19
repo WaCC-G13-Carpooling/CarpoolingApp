@@ -16,13 +16,24 @@ export class HomeCompanyComponent implements OnInit {
   displayedColumns: string[] = ['First Name', 'Last Name', 'Phone Number', 'Work Address', 'Delete'];
   currentCompany: Company;
   currentUser: User;
-  users: User[];
+  users: User[] = [];
   dataSource = new MatTableDataSource<User>(this.users);
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.loading = true;
     // tslint:disable-next-line: no-unused-expression
+    this.loading = true;
+    /*const novo: User = {
+      id: 1,
+      firstName: 'oi',
+      lastName: 'oi',
+      userName: 'oi',
+      password: 'oi',
+      phoneNumber: 'oi',
+      hasCar: true
+    };
+    this.users.push(novo);
+    console.log(this.users);*/
     this.loadAllUsers;
   }
 
@@ -43,5 +54,6 @@ private loadAllUsers() {
       this.users = users;
   });
 }
+
 
 }

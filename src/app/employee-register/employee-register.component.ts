@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
-import { UserService} from '@app/_services';
+import { UserService, AlertService} from '@app/_services';
 import { User } from '@app/_models';
 
 
@@ -12,6 +12,7 @@ export class EmployeeRegisterComponent implements OnInit{
   constructor(
     private router: Router,
     private userService: UserService,
+    private alertService: AlertService,
 ) {}
 
 ngOnInit() {
@@ -35,10 +36,6 @@ ngOnInit() {
       password: this.userForm.value.password,
       hasCar: this.userForm.value.hasCar,
     };
-
-    console.log(this.newUser.firstName);
-
-
   }
 
   onSubmit() {
@@ -46,9 +43,10 @@ ngOnInit() {
       .subscribe(
         data => {
           this.router.navigateByUrl('/employee-home');
-        }
-    );
-
+        },
+        error => {
+            this.alertService.error(error);
+        });
   }
 /*
   firstNameError() {
