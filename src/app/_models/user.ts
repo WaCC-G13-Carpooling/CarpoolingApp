@@ -9,6 +9,6 @@
     isAdmin?: boolean;
     hasCar: boolean;
     token?: string;
-    companyName?: string;
+    companyName: string;
     phoneNumber: string;
 }

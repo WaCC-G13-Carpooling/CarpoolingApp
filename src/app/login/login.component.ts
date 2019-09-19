@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService, AuthenticationService } from '@app/_services';
+import { AlertService, AuthenticationService,UserService } from '@app/_services';
+import { User } from '@app/_models';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
@@ -17,10 +18,11 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private userService: UserService,
     ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
     }
@@ -47,7 +49,24 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        var storedNames = JSON.parse(localStorage.getItem('users'));
+        for (let index = 0; index < storedNames.length; index++) {
+            const element = storedNames[index];
+            console.log(element.userName);
+            console.log(element.password);
+            console.log(this.f.username.value);
+            console.log(this.f.password.value);
+            if (element.userName === this.f.username.value) {
+                if (element.password === this.f.password.value) {
+                    console.log("IM IN");
+                    localStorage.setItem('currentUser', JSON.stringify(element));
+                    this.router.navigateByUrl('/employee-home');
+                    this.loading = false;
+                }
+            }
+            console.log("IM out");
+        }
+        /*this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -56,6 +75,6 @@ export class LoginComponent implements OnInit {
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
-                });
+                });*/
     }
 }

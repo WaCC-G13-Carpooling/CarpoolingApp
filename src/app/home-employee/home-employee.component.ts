@@ -15,10 +15,7 @@ export class HomeEmployeeComponent implements OnInit, OnDestroy {
   currentUserSubscription: Subscription;
   users: User[] = [];
   panelOpenState = false;
-  constructor(private authenticationService: AuthenticationService,
-    private userService: UserService) { this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-      this.currentUser = user;
-  });
+  constructor(private userService: UserService) { this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 }
 
   ngOnInit() {

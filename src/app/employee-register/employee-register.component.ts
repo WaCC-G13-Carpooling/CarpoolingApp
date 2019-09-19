@@ -25,6 +25,7 @@ ngOnInit() {
     phoneNumber: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     hasCar: new FormControl('', [Validators.required]),
+    companyName : new FormControl('', [Validators.required]),
   });
 }
 
