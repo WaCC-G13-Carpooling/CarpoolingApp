@@ -1,9 +1,9 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 7!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}}) {{user.homeAddress}} {{user.workAddress}} {{user.hasCar}}
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+﻿<h1>Hi!</h1>
+<p>You're using Carpooling as a Service</p>
+
+<button mat-raised-button (click)="registerEmployee()">Register as an Employee</button><br><br>
+
+<button mat-raised-button (click)="registerCompany()">Register as a Company</button><br><hr>
+
+<button mat-raised-button (click)="login()">Login</button>
+

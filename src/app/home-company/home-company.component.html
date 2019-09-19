@@ -1,34 +1,69 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link">Logout</a>
+    </div>
+</nav>
+
 <mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        lalal
-      </mat-panel-title>
-      <mat-panel-description>
-lala
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="Name">
-    </mat-form-field>
+  <h1>Welcome {{currentCompany.name}}!</h1>
 
-    <mat-form-field>
-      <input matInput placeholder="Base location">
-    </mat-form-field>
-  </div>
-  </mat-expansion-panel>
+  <mat-card><p>Company: {{currentCompany.name}}</p>
+            <p>Base Location: {{currentCompany.baseLocation}}</p>
+  </mat-card>
+  <br>
+  <h2>Manage employees</h2>
 
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="First Name">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Last Name">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Phone Number">
+      <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+      <td mat-cell *matCellDef="let user"> {{user.phoneNumber}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Work Address">
+      <th mat-header-cell *matHeaderCellDef> Work Address </th>
+      <td mat-cell *matCellDef="let user"> {{user.workAddress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let user"> <button (click)="deleteUser(user.id)"> Delete! </button> </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
   <mat-list role="list">
-      <ul>
-          <li *ngFor="let user of users">
-              Name:{{user.firstName}} {{user.lastName}}
-              Work Place: {{user.workAddress}}
-              - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-          </li>
-      </ul>
+    <ul>
+      <li *ngFor="let user of users">
+        Name:{{user.firstName}} {{user.lastName}}
+        Work Place: {{user.workAddress}}
+        <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+      </li>
+    </ul>
   </mat-list>
 
 

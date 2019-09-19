@@ -1,15 +1,14 @@
 ﻿export class User {
     id: number;
-    username: string;
+    userName: string;
     password: string;
     firstName: string;
     lastName: string;
-    homeAddress: string;
-    workAddress: string;
+    homeAddress?: string;
+    workAddress?: string;
+    isAdmin?: boolean;
     hasCar: boolean;
-    isEmployee: boolean;
-    isAdmin: boolean;
-    token: string;
-    companyName: string;
+    token?: string;
+    companyName?: string;
     phoneNumber: string;
 }

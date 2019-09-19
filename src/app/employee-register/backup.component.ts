@@ -1,12 +1,12 @@
-﻿import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, UserService, AuthenticationService } from '@app/_services';
 
-@Component({templateUrl: 'register.component.html'})
-export class RegisterComponent implements OnInit {
+@Component({templateUrl: 'employee-register.component.html'})
+export class EmployeeRegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/employee-home']);
         }
     }
 
@@ -31,17 +31,15 @@ export class RegisterComponent implements OnInit {
             lastName: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            homeAddress: ['', Validators.required],
             companyName: ['', Validators.required],
-            workAddress: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
             hasCar: ['', Validators.required],
-            isEmployee: ['', Validators.required],
         });
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
-    toggle(){
+    toggle() {
       this.textBoxDisabled = !this.textBoxDisabled;
     }
     onSubmit() {
@@ -66,3 +64,4 @@ export class RegisterComponent implements OnInit {
                 });
     }
 }
+*/
