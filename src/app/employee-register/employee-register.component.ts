@@ -39,10 +39,12 @@ ngOnInit() {
   }
 
   onSubmit() {
+    this.createUser(this.userForm)
+    console.log(this.newUser)
     this.userService.register(this.newUser)
       .subscribe(
         data => {
-          this.router.navigateByUrl('/employee-home');
+          this.router.navigateByUrl('/login');
         },
         error => {
             this.alertService.error(error);
