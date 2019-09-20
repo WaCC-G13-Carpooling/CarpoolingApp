@@ -21,7 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let newCompany = request.body;
 
                 // validation
-                let duplicateCompany = users.filter(user => { return user.userName === newCompany.userName; }).length;
+                let duplicateCompany = companies.filter(company => { return company.userName === newCompany.userName}).length;
                 if (duplicateCompany) {
                     return throwError({ error: { message: 'UserName "' + newCompany.userName + '" is already taken' } });
                 }
