@@ -1,46 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { Company } from '@app/_models';
 
-import { AlertService, UserService, AuthenticationService } from '@app/_services';
+import { AlertService, CompanyService, AuthenticationService } from '@app/_services';
 
 @Component({templateUrl: 'company-register.component.html'})
 export class CompanyRegisterComponent implements OnInit {
-    registerForm: FormGroup;
+    companyForm: FormGroup;
     loading = false;
     submitted = false;
   textBoxDisabled = true;
 
     constructor(
-        private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private userService: UserService,
+        private companyService: CompanyService,
         private alertService: AlertService
     ) {
-        // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
     }
 
     ngOnInit() {
-        this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            homeAddress: ['', Validators.required],
-            companyName: ['', Validators.required],
-            workAddress: ['', Validators.required],
-            hasCar: ['', Validators.required],
-            isEmployee: ['', Validators.required],
+        this.companyForm = new FormGroup({
+            name: new FormControl('', [Validators.required]),
+            userName: new FormControl('', Validators.required),
+            password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+            location: new FormControl('', [Validators.required]),
         });
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
+    get f() { return this.companyForm.controls; }
     toggle() {
       this.textBoxDisabled = !this.textBoxDisabled;
     }
@@ -48,12 +39,12 @@ export class CompanyRegisterComponent implements OnInit {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.registerForm.invalid) {
+        if (this.companyForm.invalid) {
             return;
         }
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
+        this.companyService.register(this.companyForm.value)
             .pipe(first())
             .subscribe(
                 data => {

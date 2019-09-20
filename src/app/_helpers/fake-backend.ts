@@ -11,15 +11,35 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+        let companies: any[] = JSON.parse(localStorage.getItem('companies')) || [];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+
+            if (request.url.endsWith('/companies/register') && request.method === 'POST') {
+                // get new user object from post body
+                let newCompany = request.body;
+
+                // validation
+                let duplicateCompany = users.filter(user => { return user.userName === newCompany.userName; }).length;
+                if (duplicateCompany) {
+                    return throwError({ error: { message: 'UserName "' + newCompany.userName + '" is already taken' } });
+                }
+
+                // save new user
+                newCompany.id = companies.length + 1;
+                companies.push(newCompany);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
 
             // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 // find if any user matches login credentials
                 let filteredUsers = users.filter(user => {
-                    return user.username === request.body.username && user.password === request.body.password;
+                    return user.userName === request.body.username && user.password === request.body.password;
                 });
 
                 if (filteredUsers.length) {
@@ -27,7 +47,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let user = filteredUsers[0];
                     let body = {
                         id: user.id,
-                        username: user.username,
+                        userName: user.userName,
                         firstName: user.firstName,
                         lastName: user.lastName,
                         token: 'fake-jwt-token'
@@ -74,9 +94,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let newUser = request.body;
 
                 // validation
-                let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+                let duplicateUser = users.filter(user => { return user.userName === newUser.userName; }).length;
                 if (duplicateUser) {
-                    return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
+                    return throwError({ error: { message: 'UserName "' + newUser.userName + '" is already taken' } });
                 }
 
                 // save new user
@@ -115,7 +135,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // pass through any requests not handled above
             return next.handle(request);
-            
+
         }))
 
         // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)

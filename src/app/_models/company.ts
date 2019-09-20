@@ -5,5 +5,7 @@ export class Company {
   name: string;
   baseLocation: string;
   locations: [Address];
+  userName: string;
+  password: string;
 }
 
