@@ -1,21 +1,39 @@
 ﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>
-</nav>
+</nav> -->
 
 <!-- main app container -->
-<div class="jumbotron">
+<!-- <div class="jumbotron">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
-                <alert></alert>
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
-</div>
+                <alert></alert> -->
+                <div class="container" fxLayoutAlign = "center">
+                  <div class="item item-1" fxFlex="100%" >
+                    <mat-toolbar color="primary">
+                      <mat-toolbar-row>
+                        <span>Carpooling as a Service</span>
+                        <div class="item item-1 logout" fxFlex="200px"><button mat-button color="accent">Logout</button>
+
+                        </div>
+
+                      </mat-toolbar-row>
+                    </mat-toolbar>
+                  </div>
+                </div>
+                <div class="container" fxLayoutAlign = "center">
+                  <div class="item item-2" fxFlex><router-outlet></router-outlet>
+                  </div>
+                </div>
+
+
+
+
+
+
 
 <!-- credits -->

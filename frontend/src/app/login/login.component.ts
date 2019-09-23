@@ -3,10 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService, AuthenticationService,UserService } from '@app/_services';
+import { AlertService, AuthenticationService, UserService } from '@app/_services';
 import { User } from '@app/_models';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+
+})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -23,7 +27,7 @@ export class LoginComponent implements OnInit {
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/employee-home']);
         }
     }
 

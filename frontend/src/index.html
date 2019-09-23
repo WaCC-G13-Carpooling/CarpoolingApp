@@ -15,6 +15,11 @@
     </style>
 </head>
 <body>
-    <app>Loading...</app>
+    <app>
+      <div class="progress-loader" [hidden]="!loading">
+
+        <mat-progress-spinner [mode]="'indeterminate'">
+        </mat-progress-spinner>
+    </app>
 </body>
 </html>
