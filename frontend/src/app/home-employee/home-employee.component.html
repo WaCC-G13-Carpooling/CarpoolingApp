@@ -22,7 +22,7 @@
   </mat-card>
 </div>
   <div class="item item-2" fxFlex="80%" fxFlexOrder="2" fxLayout = "row" fxLayoutGap = "5px">
-    <div class="container" fxLayout="column">
+    <div class="container" fxLayout="column" fxLayoutGap = "10px">
 
         <div class="item item-2 item-1" fxFlex="100%">
             <mat-card>
@@ -30,7 +30,9 @@
                 Home Address: {{currentUser.homeAddress}} <br>
                 Company : {{currentUser.companyName}}<br>
                 Work Address: {{currentUser.workAddress}} <br>
-
+                <mat-card-actions>
+                  <button mat-stroked-button color = "primary">Edit Details</button>
+              </mat-card-actions>
               </mat-card>
         </div>
         <div class="item item-2 item-2" fxFlex = "100%">
@@ -40,13 +42,15 @@
               Do you have a ride?: {{currentUser.hasCar}}
               Do you need a ride?:
             </mat-card-content>
-          </mat-card></div>
+          </mat-card>
         </div>
-        <div class="item item-3" fxFlex="100%">
+          <div class="item item-2 item-3" fxFlex="100%">
             <mat-card>
                 <mat-card-title>The map co-ordinates come here</mat-card-title>
             </mat-card>
           </div>
+
+        </div>
 
     </div>
 

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'mongodb://18.206.240.224:27017'};
+  apiUrl: 'http://localhost:3001/api'};
 
 /*
  * For easier debugging in development mode, you can import the following file
