@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { AuthenticationService } from '@app/_services';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class ErrorInterceptor{
     constructor(private authenticationService: AuthenticationService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload(true);
             }
-            
+
             const error = err.error.message || err.statusText;
             return throwError(error);
         }))

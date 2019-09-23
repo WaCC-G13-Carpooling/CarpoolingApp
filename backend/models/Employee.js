@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import {Address} from './Address';
+import Address from './Address';
 import cors from 'cors';
 
 const Schema = mongoose.Schema;
 var AddressSchema = require('../models/Address').schema;
 
-let Company = new Schema({
+let Employee = new Schema({
     userName: {
         type: String
     },
@@ -19,10 +19,10 @@ let Company = new Schema({
       type:String
     },
     homeAddress: {
-        type: Schema.Types.ObjectId,ref : 'Address'
+        type: Schema.Types.ObjectId, ref : "Address"
     },
     workAddress: {
-      type: Schema.Types.ObjectId,ref : 'Address'
+      type: Schema.Types.ObjectId, ref : "Address"
   },
     isAdmin: {
       type : Boolean
@@ -35,7 +35,7 @@ let Company = new Schema({
     },
     phoneNumber : {
       type: String
-    }
-    ,autoCreate: true})
+    }}
+    ,{autoCreate: true})
 
-export default mongoose.model('Company', Company);
+export default mongoose.model('Employee', Employee);

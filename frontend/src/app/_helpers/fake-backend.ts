@@ -4,10 +4,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor {
+export class FakeBackendInterceptor {
 
     constructor() { }
-
+/*
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
@@ -143,6 +143,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         .pipe(delay(500))
         .pipe(dematerialize());
     }
+    */
 }
 
 export let fakeBackendProvider = {

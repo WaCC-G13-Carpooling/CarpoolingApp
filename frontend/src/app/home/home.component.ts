@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 }
 
 login() {
-  console.log("going in");
+  console.log('going in');
   this.router.navigateByUrl('/login');
 }
 

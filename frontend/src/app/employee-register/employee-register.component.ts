@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
-import { UserService, AlertService} from '@app/_services';
-import { User } from '@app/_models';
+import { UserService, AlertService, EmployeeService} from '@app/_services';
+import { User, Employee } from '@app/_models';
 import { first } from 'rxjs/operators';
 
 
@@ -12,7 +12,7 @@ export class EmployeeRegisterComponent implements OnInit{
   public newUser: User;
   constructor(
     private router: Router,
-    private userService: UserService,
+    private employeeService: EmployeeService,
     private alertService: AlertService,
 ) {}
 
@@ -30,12 +30,12 @@ ngOnInit() {
 }
 
   onSubmit() {
-    this.userService.register(this.userForm.value)
+    this.employeeService.register(this.userForm.value)
             .pipe(first())
             .subscribe(
                 data => {
+                  console.log('in');
                     this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
                 },
                 error => {
                     this.alertService.error(error);

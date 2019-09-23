@@ -11,10 +11,10 @@ let Company = new Schema({
         type: String
     },
     baseLocation: {
-        type: AddressSchema.Types.ObjectId,ref : 'Address'
+        type: Schema.Types.ObjectId,ref : 'Address'
     },
     locations: [{
-        type: AddressSchema.Types.ObjectId,ref : 'Address'
+        type: Schema.Types.ObjectId,ref : 'Address'
     }],
     userName :{
         type:String
@@ -23,8 +23,7 @@ let Company = new Schema({
       type:String
     },
     employeeList :{
-      type: EmployeeSchema.Types.ObjectId,ref : 'Employee'
-    }
-    ,autoCreate: true})
+      type: Schema.Types.ObjectId,ref : 'Employee'
+    }},{autoCreate: true})
 
 export default mongoose.model('Company', Company);

@@ -7,13 +7,14 @@ import Employee from './models/Employee'
 import Address from './models/Address'
 import Company from './models/Company'
 
-
-
 const app = express();
 const router = express.Router();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/', router);
+
+app.listen(4200, () => console.log('express server running on port 4200'));
 
 mongoose.connect("mongodb://18.206.240.224:27017");
 
@@ -29,6 +30,18 @@ router.route('/employees').get((req, res) => {
   })
 })
 
+router.route('/employees/register').post((req, res) => {
+  let employee = new Employee(req.body);
+  employee.save()
+    .then(employee => {
+      res.status(200).json({ 'employee': 'Added successfully!' })
+    })
+    .catch(err => {
+      res.status(400).send('Failed to create new record!');
+    })
+});
+
+
 router.route('/employees/:id').get((req, res) => {
   Employee.findById(req.params.id, (err, employee) => {
     if(err)
@@ -38,3 +51,11 @@ router.route('/employees/:id').get((req, res) => {
   })
 })
 
+router.route('/employees/delete/:id').get((req, res) => {
+  Employee.findByIdAndRemove({ _id: req.params.id}, (err, employee) => {
+    if(err)
+      console.log(err);
+    else
+      res.json('Remove successfull');
+  })
+})

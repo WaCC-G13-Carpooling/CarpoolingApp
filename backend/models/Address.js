@@ -15,7 +15,7 @@ let Address = new Schema({
     },
     zipCode: {
         type: String
-    },
+    }},{
     autoCreate: true})
 
 export default mongoose.model('Address', Address);
