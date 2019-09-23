@@ -34,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
@@ -90,6 +91,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
     MatSortModule,
     MatPaginatorModule,
     FormsModule,
+    FlexLayoutModule
     ],
     exports: [
       BrowserAnimationsModule,
