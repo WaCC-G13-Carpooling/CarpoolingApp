@@ -1,5 +1,11 @@
+<div class="progress-loader" [hidden]="!loading">
+       
+    <mat-progress-spinner [mode]="'indeterminate'">
+    </mat-progress-spinner>
+ 
+</div>
 
-<mat-accordion>
+
 
   <h1>Welcome {{currentCompany.name}}!</h1>
 
@@ -60,4 +66,4 @@
   </mat-list>
 
 
-</mat-accordion>
+
