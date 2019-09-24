@@ -1,56 +1,61 @@
 <div>
   <h1>
   Welcome to Carpooling for Employees!</h1><br>
-  <h2> Register in the following areas:</h2><br>
+  <h2> Registration is just a few clicks and words away!</h2><br>
 
-  *mandatory fields.
 </div>
-
+<mat-card>
+  <mat-card-title>Please enter your details.</mat-card-title>
+  <mat-card-subtitle>
+  Fields with '*' are mandatory fields.
+  </mat-card-subtitle>
 <div [formGroup]="userForm">
+    <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Enter your First name" formControlName="firstName" required>
+      <!--mat-error *ngIf="firstName.invalid">{{firstNameError()}}</mat-error-->
+    </mat-form-field>
+  </div>
   <div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Enter your First name" formControlName="firstName" required>
-    <!--mat-error *ngIf="firstName.invalid">{{firstNameError()}}</mat-error-->
-  </mat-form-field>
-</div>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Enter your Last name" formControlName="lastName" required>
-    <!--mat-error *ngIf="lastName.invalid">{{lastNameError()}}</mat-error-->
-  </mat-form-field>
-</div>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Enter your User name " formControlName="userName" required>
-    <!--mat-error *ngIf="userName.invalid">{{userNameError()}}</mat-error-->
-  </mat-form-field>
-</div>
-<div class="example-container">
-  <mat-form-field>
-    <input type="password" matInput placeholder="Enter your Password" formControlName="password" required>
-    <!-- <mat-error *ngIf="password.invalid">{{passwordError()}}</mat-error> -->
-  </mat-form-field>
-</div>
-<div class="example-container">
-  <mat-form-field>
-    <input type="companyName" matInput placeholder="Enter your Company Name" formControlName="companyName" required>
-    <!-- <mat-error *ngIf="password.invalid">{{passwordError()}}</mat-error> -->
-  </mat-form-field>
-</div>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Enter your Phone number" formControlName="phoneNumber" required>
-    <!-- <mat-error *ngIf="phoneNumber.invalid">{{phoneNumberError()}}</mat-error> -->
-  </mat-form-field>
-</div>
-<div>
-  <mat-radio-group formControlName="hasCar" validation="required" aria-label="Select an option">
-  <h5>Do you own a car?</h5>
-  <mat-radio-button value="Yes">Yes</mat-radio-button>&nbsp; &nbsp;
-  <mat-radio-button value="No">No</mat-radio-button>
-</mat-radio-group>
-</div>
-<br><br>
-<button mat-raised-button (click)="onSubmit()">Submit</button>
-
-</div>
+    <mat-form-field>
+      <input matInput placeholder="Enter your Last name" formControlName="lastName" required>
+      <!--mat-error *ngIf="lastName.invalid">{{lastNameError()}}</mat-error-->
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Enter your User name " formControlName="userName" required>
+      <!--mat-error *ngIf="userName.invalid">{{userNameError()}}</mat-error-->
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-form-field>
+      <input type="password" matInput placeholder="Enter your Password" formControlName="password" required>
+      <!-- <mat-error *ngIf="password.invalid">{{passwordError()}}</mat-error> -->
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-form-field>
+      <input type="companyName" matInput placeholder="Enter your Company Name" formControlName="companyName" required>
+      <!-- <mat-error *ngIf="password.invalid">{{passwordError()}}</mat-error> -->
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Enter your Phone number" formControlName="phoneNumber" required>
+      <!-- <mat-error *ngIf="phoneNumber.invalid">{{phoneNumberError()}}</mat-error> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-radio-group formControlName="hasCar" validation="required" aria-label="Select an option">
+    <h5>Do you own a car?</h5>
+    <mat-radio-button value="Yes">Yes</mat-radio-button>&nbsp; &nbsp;
+    <mat-radio-button value="No">No</mat-radio-button>
+  </mat-radio-group>
+  </div>
+  <br><br>
+  <button mat-raised-button (click)="onSubmit()">Submit</button>
+  
+  </div>
+  
+</mat-card>
