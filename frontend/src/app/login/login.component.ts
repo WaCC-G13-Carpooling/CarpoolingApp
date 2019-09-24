@@ -55,11 +55,10 @@ export class LoginComponent implements OnInit {
                     if (element.password === this.loginForm.get('password').value) {
                         this.loading = false;
                         this.currentUser = element;
-                        this.router.navigateByUrl('/employee-home/' + element._id);
+                        this.router.navigateByUrl('/employee-home/' + Object.values(element)[0]);
                     }
                 }
             });
-
         });
 /*
         var storedNames = JSON.parse(localStorage.getItem('users'));

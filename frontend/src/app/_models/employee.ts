@@ -1,5 +1,4 @@
 export class Employee {
-  id: number;
   userName: string;
   password: string;
   firstName: string;
@@ -7,8 +6,7 @@ export class Employee {
   homeAddress?: string;
   workAddress?: string;
   isAdmin?: boolean;
-  hasCar: boolean;
-  token?: string;
+  hasCar: string;
   companyName: string;
   phoneNumber: string;
 }

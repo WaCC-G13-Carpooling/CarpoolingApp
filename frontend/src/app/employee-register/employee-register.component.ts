@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
-import { UserService, AlertService, EmployeeService} from '@app/_services';
-import { User, Employee } from '@app/_models';
+import { AlertService, EmployeeService} from '@app/_services';
+import { Employee } from '@app/_models';
 import { first } from 'rxjs/operators';
 
 
 @Component({templateUrl: 'employee-register.component.html'})
 export class EmployeeRegisterComponent implements OnInit{
   public userForm: FormGroup;
-  public newUser: User;
+  public newEmployee: Employee;
   constructor(
     private router: Router,
     private employeeService: EmployeeService,
@@ -30,12 +30,25 @@ ngOnInit() {
 }
 
   onSubmit() {
-    this.employeeService.register(this.userForm.value)
-            .pipe(first())
-            .subscribe(
+
+   this.newEmployee = {
+  userName: this.userForm.get('userName').value,
+  password: this.userForm.get('password').value,
+  firstName: this.userForm.get('firstName').value,
+  lastName: this.userForm.get('lastName').value,
+  hasCar: this.userForm.get('hasCar').value,
+  companyName: this.userForm.get('companyName').value,
+  phoneNumber: this.userForm.get('phoneNumber').value,
+  homeAddress: null,
+  workAddress: null,
+  isAdmin: false
+    };
+
+    this.employeeService.register(this.newEmployee).pipe(first()).subscribe(
                 data => {
                   console.log('in');
                     this.alertService.success('Registration successful', true);
+                    this.router.navigateByUrl('/login');
                 },
                 error => {
                     this.alertService.error(error);

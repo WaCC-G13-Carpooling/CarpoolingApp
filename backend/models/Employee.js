@@ -19,16 +19,16 @@ let Employee = new Schema({
       type:String
     },
     homeAddress: {
-        type: Schema.Types.ObjectId, ref : "Address"
+        type: String
     },
     workAddress: {
-      type: Schema.Types.ObjectId, ref : "Address"
+      type: String
   },
     isAdmin: {
       type : Boolean
     },
     hasCar : {
-      type: Boolean
+      type: String
     },
     companyName : {
       type:String

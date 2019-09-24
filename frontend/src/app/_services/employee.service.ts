@@ -21,8 +21,8 @@ register(employee: Employee) {
     return this.http.post(`${environment.apiUrl}/employees/register`, employee);
 }
 
-update(employee: Employee) {
-    return this.http.put(`${environment.apiUrl}/employees/${employee.id}`, employee);
+update(id:number, employee: Employee) {
+    return this.http.put(`${environment.apiUrl}/employees/${id}`, employee);
 }
 
 delete(id: number) {

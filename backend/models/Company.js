@@ -1,9 +1,7 @@
 import mongoose from 'mongoose';
-import {Address} from './Address';
 import cors from 'cors';
 
 const Schema = mongoose.Schema;
-var AddressSchema = require('../models/Address').schema;
 var EmployeeSchema = require('../models/Employee').schema;
 
 let Company = new Schema({
@@ -11,10 +9,10 @@ let Company = new Schema({
         type: String
     },
     baseLocation: {
-        type: Schema.Types.ObjectId,ref : 'Address'
+        type: String
     },
     locations: [{
-        type: Schema.Types.ObjectId,ref : 'Address'
+        type: String
     }],
     userName :{
         type:String
