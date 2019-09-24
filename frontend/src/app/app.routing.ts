@@ -10,8 +10,8 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'login', component: LoginComponent },
-    { path: 'employee-home', component: HomeEmployeeComponent},
-    { path: 'company-home', component: HomeCompanyComponent},
+    { path: 'employee-home/:id', component: HomeEmployeeComponent},
+    { path: 'company-home/:id', component: HomeCompanyComponent},
     { path: 'employee-register', component: EmployeeRegisterComponent},
     { path: 'company-register', component: CompanyRegisterComponent},
 

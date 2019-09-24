@@ -1,40 +1,41 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { User } from '@app/_models';
-import { UserService, AuthenticationService } from '@app/_services';
+import { Employee } from '@app/_models';
+import { EmployeeService, AuthenticationService } from '@app/_services';
 
 @Component({
   selector: 'app-home-employee',
   templateUrl: './home-employee.component.html',
   styleUrls: ['./home-employee.component.css']
 })
-export class HomeEmployeeComponent implements OnInit, OnDestroy {
-  currentUser: User;
-  currentUserSubscription: Subscription;
-  users: User[] = [];
+export class HomeEmployeeComponent implements OnInit {
+  currentUser: Employee;
+  employees: Employee[] = [];
   panelOpenState = false;
-  constructor(private userService: UserService) { this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-}
+  id;
+  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.currentUserSubscription.unsubscribe();
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.employeeService.getById(this.id).subscribe(employee => { 
+        this.currentUser = employee;
+        console.log(this.currentUser);
+      });
+  });
 }
 
 deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => {
-        this.loadAllUsers()
+    this.employeeService.delete(id).pipe(first()).subscribe(() => {
+        this.loadAllUsers();
     });
 }
 
 private loadAllUsers() {
-    this.userService.getAll().pipe(first()).subscribe(users => {
-        this.users = users;
+    this.employeeService.getAll().pipe(first()).subscribe(employees => {
+        this.employees = employees;
     });
 }
 

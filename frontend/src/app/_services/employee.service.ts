@@ -14,7 +14,7 @@ export class EmployeeService {
 }
 
 getById(id: number) {
-    return this.http.get(`${environment.apiUrl}/employees/${id}`);
+    return this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`);
 }
 
 register(employee: Employee) {

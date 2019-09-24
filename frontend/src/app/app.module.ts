@@ -36,20 +36,17 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
 import { AlertComponent } from './_components';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { HomeCompanyComponent } from './home-company/home-company.component';
 import { HomeEmployeeComponent } from './home-employee/home-employee.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
+import { EmployeeService, CompanyService } from './_services';
 
 @NgModule({
   imports: [
@@ -112,12 +109,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
     EmployeeRegisterComponent,
     CompanyRegisterComponent
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-    // provider used to create fake backend
-    fakeBackendProvider
+  providers: [EmployeeService, CompanyService
   ],
   bootstrap: [AppComponent]
 })
