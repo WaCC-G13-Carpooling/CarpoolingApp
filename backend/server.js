@@ -16,7 +16,7 @@ app.use('/', router);
 
 app.listen(3001, () => console.log('express server running on port 3001'));
 
-mongoose.connect("mongodb://18.206.240.224:27017");
+mongoose.connect("mongodb://18.206.240.224:27017/carpool", { useNewUrlParser: true });
 
 mongoose.connection.on('connected', () => console.log('Connected to server!'));
 mongoose.connection.on('error', () => console.log('Connection failed with error!'));

@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService, AuthenticationService, UserService } from '@app/_services';
-import { User } from '@app/_models';
+import { AlertService, AuthenticationService, UserService, EmployeeService } from '@app/_services';
+import { User, Employee } from '@app/_models';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
         private userService: UserService,
+        private employeeService: EmployeeService,
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
@@ -53,6 +54,9 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
+
+        this.employeeService.getAll();
+
         var storedNames = JSON.parse(localStorage.getItem('users'));
         for (let index = 0; index < storedNames.length; index++) {
             const element = storedNames[index];
