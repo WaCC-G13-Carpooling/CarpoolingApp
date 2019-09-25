@@ -13,7 +13,6 @@ import { EmployeeService, AuthenticationService } from '@app/_services';
 export class HomeEmployeeComponent implements OnInit {
   currentUser: Employee;
   employees: Employee[] = [];
-  panelOpenState = false;
   id;
   constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {}
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@app/_models';
-import { UserService } from '@app/_services';
+import { EmployeeService, CompanyService } from '@app/_services';
 import { first } from 'rxjs/operators';
-import { Company } from '@app/_models/company';
+import { Company, Employee } from '@app/_models';
 import {MatTableDataSource} from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,29 +12,22 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./home-company.component.css']
 })
 export class HomeCompanyComponent implements OnInit {
-  loading = false;
   displayedColumns: string[] = ['First Name', 'Last Name', 'Phone Number', 'Work Address', 'Delete'];
   currentCompany: Company;
-  currentUser: User;
-  users: User[] = [];
-  dataSource = new MatTableDataSource<User>(this.users);
-  constructor(private userService: UserService) {}
+  companies: Company[] = [];
+  id;
+  employees: Employee[] = [];
+  dataSource = new MatTableDataSource<Employee>(this.employees);
+  constructor(private employeeService: EmployeeService, private companyService: CompanyService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    // tslint:disable-next-line: no-unused-expression
-    this.loading = true;
-    /*const novo: User = {
-      id: 1,
-      firstName: 'oi',
-      lastName: 'oi',
-      userName: 'oi',
-      password: 'oi',
-      phoneNumber: 'oi',
-      hasCar: true
-    };
-    this.users.push(novo);
-    console.log(this.users);*/
-    this.loadAllUsers;
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.companyService.getById(this.id).subscribe(company => {
+        this.currentCompany = company;
+      });
+  });
+
   }
 
   applyFilter(filterValue: string) {
@@ -42,18 +35,15 @@ export class HomeCompanyComponent implements OnInit {
   }
 
 
-  deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => {
-        this.loadAllUsers();
+  deleteEmployee(id: number) {
+    this.employeeService.delete(id).pipe(first()).subscribe(() => {
+        this.loadAllEmployees();
     });
 }
 
-private loadAllUsers() {
-  this.userService.getAll().pipe(first()).subscribe(users => {
-      this.loading = false;
-      this.users = users;
+private loadAllEmployees() {
+  this.employeeService.getAll().pipe(first()).subscribe(employees => {
+      this.employees = employees;
   });
 }
-
-
 }

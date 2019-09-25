@@ -13,15 +13,15 @@ export class CompanyService {
     }
 
     getById(id: number) {
-        return this.http.get(`${environment.apiUrl}/companies/${id}`);
+        return this.http.get<Company>(`${environment.apiUrl}/companies/${id}`);
     }
 
     register(company: Company) {
         return this.http.post(`${environment.apiUrl}/companies/register`, company);
     }
 
-    update(company: Company) {
-        return this.http.put(`${environment.apiUrl}/companies/${company.id}`, company);
+    update(id: number, company: Company) {
+        return this.http.post(`${environment.apiUrl}/companies/update/${id}`, company);
     }
 
     delete(id: number) {

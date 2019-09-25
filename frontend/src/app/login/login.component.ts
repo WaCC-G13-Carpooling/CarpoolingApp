@@ -2,8 +2,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { EmployeeService } from '@app/_services';
-import { Employee } from '@app/_models';
+import { EmployeeService, CompanyService } from '@app/_services';
+import { Employee, Company } from '@app/_models';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +15,14 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     employees: Employee[];
+    companies: Company[];
     currentUser: Employee;
+    currentCompany: Company;
 
     constructor(
         private formBuilder: FormBuilder,
         private employeeService: EmployeeService,
+        private companyService: CompanyService,
         private router: Router
     ) {
     }
@@ -52,10 +55,33 @@ export class LoginComponent implements OnInit {
                         this.loading = false;
                         this.currentUser = element;
                         this.router.navigateByUrl('/employee-home/' + Object.values(element)[0]);
-                    }
+                    } else {
+                    console.log('wrong password');
+                }
                 }
             });
+            this.loading = false;
         });
+
+        this.companyService.getAll().subscribe((data: Company[]) => {
+            this.companies = [];
+            this.companies = data;
+            this.companies.forEach(element => {
+                if (element.userName === this.loginForm.get('userName').value) {
+                    if (element.password === this.loginForm.get('password').value) {
+                        this.loading = false;
+                        this.currentCompany = element;
+                        this.router.navigateByUrl('/company-home/' + Object.values(element)[1]);
+                    } else {
+                        console.log('wrong password');
+                    }
+
+                }
+            });
+            this.loading = false;
+        });
+
+
 /*
         var storedNames = JSON.parse(localStorage.getItem('users'));
         for (let index = 0; index < storedNames.length; index++) {

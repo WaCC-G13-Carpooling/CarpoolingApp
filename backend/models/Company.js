@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 const Schema = mongoose.Schema;
-var EmployeeSchema = require('../models/Employee').schema;
 
 let Company = new Schema({
     name: {
@@ -20,8 +19,8 @@ let Company = new Schema({
     password: {
       type:String
     },
-    employeeList :{
-      type: Schema.Types.ObjectId,ref : 'Employee'
-    }},{autoCreate: true})
+    employeeList : [{
+      type: String
+    }]},{autoCreate: true})
 
 export default mongoose.model('Company', Company);

@@ -21,6 +21,8 @@ mongoose.connect("mongodb://18.206.240.224:27017/carpool", { useNewUrlParser: tr
 mongoose.connection.on('connected', () => console.log('Connected to server!'));
 mongoose.connection.on('error', () => console.log('Connection failed with error!'));
 
+// ROUTES FOR EMPLOYEES
+
 router.route('/employees').get((req, res) => {
   Employee.find((err, employees) => {
     if(err)
@@ -59,3 +61,58 @@ router.route('/employees/delete/:id').get((req, res) => {
       res.json('Remove successfull');
   })
 })
+
+// ROUTES FOR COMPANIES
+
+router.route('/companies').get((req, res) => {
+  Company.find((err, companies) => {
+    if(err)
+      console.log(err);
+    else
+      res.json(companies);
+  })
+})
+
+router.route('/companies/:id').get((req, res) => {
+  Company.findById(req.params.id, (err, company) => {
+    if(err)
+      console.log(err);
+    else
+      res.json(company);
+  })
+})
+
+
+router.route('/companies/register').post((req, res) => {
+  let company = new Company(req.body);
+  company.save()
+    .then(company => {
+      res.status(200).json({ 'company': 'Added successfully!' })
+    })
+    .catch(err => {
+      res.status(400).send('Failed to create new record!');
+    })
+});
+
+router.route('/companies/update/:id').post((req,res) => {
+  Company.findById(req.params.id, (err, company) => {
+    if (!company) {
+      return next(new Error('Could not load document'));
+    }
+    else {
+      company.name = req.body.name;
+      company.userName = req.body.userName;
+      company.password = req.body.password;
+      company.baseLocation = req.body.baseLocation;
+      company.employeeList = req.body.employeeList;
+      company.locations = req.body.locations;
+
+      docente.save().then(issue => {
+        res.json('Update done');
+      }).catch(err => {
+        res.status(400).send('Update failed');
+      });
+    }
+  });
+})
+
