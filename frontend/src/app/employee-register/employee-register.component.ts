@@ -46,7 +46,8 @@ export class EmployeeRegisterComponent implements OnInit {
       phoneNumber: this.userForm.get('phoneNumber').value,
       homeAddress: null,
       workAddress: null,
-      isAdmin: false
+      isAdmin: false,
+      vehicleCapacity: 0
     };
 
     this.employeeService.register(this.newEmployee).pipe(first()).subscribe(

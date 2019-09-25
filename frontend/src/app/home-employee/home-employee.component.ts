@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Employee } from '@app/_models';
 import { EmployeeService, AuthenticationService } from '@app/_services';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-employee',
@@ -14,16 +15,27 @@ export class HomeEmployeeComponent implements OnInit {
   currentUser: Employee;
   employees: Employee[] = [];
   id;
+  vehicleCapacity: Number;
+  public vehicleCapacityForm: FormGroup;
   constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params.id;
-      this.employeeService.getById(this.id).subscribe(employee => { 
+      this.employeeService.getById(this.id).subscribe(employee => {
         this.currentUser = employee;
-        console.log(this.currentUser);
       });
   });
+
+  this.vehicleCapacityForm = new FormGroup({
+    vehicleCapacity: new FormControl(''),
+  });
+
+}
+
+onSubmit() {
+  this.vehicleCapacity = this.vehicleCapacityForm.get('vehicleCapacity').value;
+  console.log(this.vehicleCapacity);
 }
 
 deleteUser(id: number) {

@@ -9,4 +9,5 @@ export class Employee {
   hasCar: string;
   companyName: string;
   phoneNumber: string;
+  vehicleCapacity?: number;
 }
