@@ -94,7 +94,7 @@ router.route('/companies/register').post((req, res) => {
     })
 });
 
-router.route('/companies/update/:id').post((req,res) => {
+router.route('/companies/update/:id').put((req,res) => {
   Company.findById(req.params.id, (err, company) => {
     if (!company) {
       return next(new Error('Could not load document'));
@@ -107,7 +107,7 @@ router.route('/companies/update/:id').post((req,res) => {
       company.employeeList = req.body.employeeList;
       company.locations = req.body.locations;
 
-      docente.save().then(issue => {
+      company.save().then(issue => {
         res.json('Update done');
       }).catch(err => {
         res.status(400).send('Update failed');

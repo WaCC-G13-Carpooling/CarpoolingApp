@@ -65,14 +65,15 @@ export class EmployeeRegisterComponent implements OnInit {
       companies.forEach(company => {
         if (company.name === this.newEmployee.companyName) {
           this.actualCompany = company;
-          console.log(this.actualCompany.employeeList);
           this.actualCompany.employeeList = [];
           this.actualCompany.employeeList.push(this.newEmployee.userName);
         }
       });
       console.log(this.actualCompany.employeeList);
       console.log(this.actualCompany);
-      this.companyService.update((Object.values(this.actualCompany)[2]), this.actualCompany);
+      console.log((Object.values(this.actualCompany)[2]));
+
+      this.companyService.update((Object.values(this.actualCompany)[2]), this.actualCompany).subscribe();
     });
   }
 

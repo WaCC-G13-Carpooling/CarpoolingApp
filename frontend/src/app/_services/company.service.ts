@@ -21,7 +21,7 @@ export class CompanyService {
     }
 
     update(id: number, company: Company) {
-        return this.http.post(`${environment.apiUrl}/companies/update/${id}`, company);
+        return this.http.put(`${environment.apiUrl}/companies/update/${id}`, company);
     }
 
     delete(id: number) {
