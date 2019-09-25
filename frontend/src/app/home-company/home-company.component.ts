@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home-company.component.css']
 })
 export class HomeCompanyComponent implements OnInit {
-  displayedColumns: string[] = ['First Name', 'Last Name', 'Phone Number', 'Work Address', 'Delete'];
+  displayedColumns = ['First Name', 'Last Name', 'Phone Number', 'Work Address', 'Delete'];
   currentCompany: Company;
   companies: Company[] = [];
   id;
@@ -21,11 +21,11 @@ export class HomeCompanyComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private companyService: CompanyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      console.log(params.id);
+    this.route.params.pipe(first()).subscribe(params => {
       this.id = params.id;
-      this.companyService.getById(this.id).subscribe(company => {
+      this.companyService.getById(this.id).pipe(first()).subscribe(company => {
         this.currentCompany = company;
+        this.loadAllEmployees();
       });
     });
     
@@ -43,7 +43,6 @@ export class HomeCompanyComponent implements OnInit {
   }
 
   private loadAllEmployees() {
-    console.log(this.currentCompany);
     this.employeeService.getAll().pipe(first()).subscribe(employees => {
       employees.forEach(employee => {
         this.currentCompany.employeeList.forEach(employeeOfList => {
@@ -52,6 +51,8 @@ export class HomeCompanyComponent implements OnInit {
           }
         });
       });
+      this.dataSource = new MatTableDataSource<Employee>(this.employees);
     });
-  console.log(this.employees);  }
+    
+  }
 }
