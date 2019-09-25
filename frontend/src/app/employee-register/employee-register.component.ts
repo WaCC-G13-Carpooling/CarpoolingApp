@@ -69,10 +69,6 @@ export class EmployeeRegisterComponent implements OnInit {
           this.actualCompany.employeeList.push(this.newEmployee.userName);
         }
       });
-      console.log(this.actualCompany.employeeList);
-      console.log(this.actualCompany);
-      console.log((Object.values(this.actualCompany)[2]));
-
       this.companyService.update((Object.values(this.actualCompany)[2]), this.actualCompany).subscribe();
     });
   }

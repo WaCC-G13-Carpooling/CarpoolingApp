@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
                     if (element.password === this.loginForm.get('password').value) {
                         this.loading = false;
                         this.currentCompany = element;
-                        this.router.navigateByUrl('/company-home/' + Object.values(element)[1]);
+                        this.router.navigateByUrl('/company-home/' + Object.values(element)[2]);
                     } else {
                         console.log('wrong password');
                     }
