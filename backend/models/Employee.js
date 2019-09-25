@@ -35,7 +35,10 @@ let Employee = new Schema({
     },
     phoneNumber : {
       type: String
-    }}
-    ,{autoCreate: true})
+    },
+    vehicleCapacity:{
+      type:Number
+  }}
+  ,{autoCreate: true})
 
 export default mongoose.model('Employee', Employee);
